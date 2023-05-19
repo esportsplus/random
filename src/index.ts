@@ -10,13 +10,7 @@ function node() {
 }
 
 
-const float = (): number => {
-    if (globalThis?.crypto) {
-        return browser();
-    }
-
-    return node();
-};
+const float = globalThis?.crypto ? browser : node;
 
 // Fisher-Yates shuffle
 // - https://wikipedia.org/wiki/Fisher-Yates_shuffle
