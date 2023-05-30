@@ -17,7 +17,7 @@ export default <T>(items: T[], weights?: number[]): T => {
         total = BASIS_POINTS;
 
     for (let i = 0, n = weights.length; i < n; i++) {
-        total += weights[i];
+        total -= weights[i];
     }
 
     if (total !== 0) {
