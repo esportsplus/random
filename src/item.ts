@@ -1,28 +1,25 @@
-import rng from './rng';
+import rng from "./rng";
 
 
 export default <T>(items: T[], weights?: number[]): T => {
-    let random = rng();
-
     if (weights === undefined) {
-        return items[ Math.floor(random * items.length) ];
+        return items[ Math.floor(rng() * items.length) ];
     }
 
     if (items.length !== weights.length) {
-        throw new Error('Random: each option requires a chance number');
+        throw new Error('Random: each item requires a weight');
     }
 
-    let sum = 0;
+    let random = rng(),
+        total = 10000;
 
     for (let i = 0, n = weights.length; i < n; i++) {
-        sum += weights[i];
+        total += weights[i];
     }
 
-    if (sum < .9) {
-        throw new Error('Random: chance numbers need to exceed a total value of .9');
+    if (total !== 0) {
+        throw new Error('Random: weights use basis point math, they must add up to 10000 ( 100% )');
     }
-
-    let total = 0;
 
     for (let i = 0, n = items.length; i < n; i++) {
         total += weights[i];
@@ -32,5 +29,5 @@ export default <T>(items: T[], weights?: number[]): T => {
         }
     }
 
-    throw new Error('Random: weighted option pick failed');
+    throw new Error('Random: weighted item pick failed');
 };
