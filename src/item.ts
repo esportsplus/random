@@ -1,6 +1,9 @@
 import rng from "./rng";
 
 
+const BASIS_POINTS = 10000;
+
+
 export default <T>(items: T[], weights?: number[]): T => {
     if (weights === undefined) {
         return items[ Math.floor(rng() * items.length) ];
@@ -10,8 +13,8 @@ export default <T>(items: T[], weights?: number[]): T => {
         throw new Error('Random: each item requires a weight');
     }
 
-    let random = rng(),
-        total = 10000;
+    let random = rng() * BASIS_POINTS,
+        total = BASIS_POINTS;
 
     for (let i = 0, n = weights.length; i < n; i++) {
         total += weights[i];
