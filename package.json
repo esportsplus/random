@@ -14,7 +14,7 @@
         "prepublishOnly": "npm run build"
     },
     "types": "build/index.d.ts",
-    "version": "0.0.6",
+    "version": "0.0.7",
     "dependencies": {
         "@esportsplus/crypto": "^0.0.2"
     }
