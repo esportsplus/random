@@ -1,4 +1,4 @@
-import rng from './rng';
+import { rng } from '@esportsplus/crypto';
 
 
 // Fisher-Yates shuffle

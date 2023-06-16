@@ -1,4 +1,4 @@
-import rng from './rng';
+import { rng } from '@esportsplus/crypto';
 
 
 export default (percentage: number) => {
