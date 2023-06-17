@@ -2,7 +2,7 @@
     "author": "ICJR",
     "description": "Random",
     "devDependencies": {
-        "@esportsplus/rspack": "^0.0.10"
+        "@esportsplus/rspack": "^0.0.15"
     },
     "main": "build/index.js",
     "name": "@esportsplus/random",
@@ -16,6 +16,6 @@
     "types": "build/index.d.ts",
     "version": "0.0.7",
     "dependencies": {
-        "@esportsplus/crypto": "^0.0.2"
+        "@esportsplus/crypto": "^0.0.4"
     }
 }
