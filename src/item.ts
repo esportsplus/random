@@ -1,7 +1,7 @@
 import { rng } from '@esportsplus/crypto';
 
 
-const BASIS_POINTS = 10000;
+let cache = new WeakMap();
 
 
 export default <T>(items: T[], weights?: number[]): T => {
@@ -13,21 +13,23 @@ export default <T>(items: T[], weights?: number[]): T => {
         throw new Error('Random: each item requires a weight');
     }
 
-    let random = rng() * BASIS_POINTS,
-        total = BASIS_POINTS;
+    let total = cache.get(weights) || 0;
 
-    for (let i = 0, n = weights.length; i < n; i++) {
-        total -= weights[i];
+    if (!total) {
+        for (let i = 0, n = weights.length; i < n; i++) {
+            total += weights[i];
+        }
+
+        cache.set(weights, total);
     }
 
-    if (total !== 0) {
-        throw new Error('Random: weights use basis point math, they must add up to 10000 ( 100% )');
-    }
+    let current = 0,
+        random = rng() * total;
 
     for (let i = 0, n = items.length; i < n; i++) {
-        total += weights[i];
+        current += weights[i];
 
-        if (random <= total) {
+        if (random <= current) {
             return items[i];
         }
     }
