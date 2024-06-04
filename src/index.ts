@@ -5,5 +5,4 @@ import roll from './roll';
 import shuffle from './shuffle';
 
 
-export default { coinflip, item, range, roll, shuffle };
 export { coinflip, item, range, roll, shuffle };
