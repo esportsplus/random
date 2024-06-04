@@ -1,6 +1,8 @@
 {
     "author": "ICJR",
-    "description": "Random",
+    "dependencies": {
+        "@esportsplus/crypto": "^0.0.4"
+    },
     "devDependencies": {
         "@esportsplus/typescript": "^0.0.21"
     },
@@ -14,8 +16,5 @@
         "prepublishOnly": "npm run build"
     },
     "types": "build/index.d.ts",
-    "version": "0.0.9",
-    "dependencies": {
-        "@esportsplus/crypto": "^0.0.4"
-    }
+    "version": "0.0.9"
 }
