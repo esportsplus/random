@@ -4,7 +4,7 @@
         "@esportsplus/crypto": "^0.0.14"
     },
     "devDependencies": {
-        "@esportsplus/typescript": "^0.4.13"
+        "@esportsplus/typescript": "^0.6.3"
     },
     "main": "build/index.js",
     "name": "@esportsplus/random",
