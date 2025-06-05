@@ -1,10 +1,10 @@
 {
     "author": "ICJR",
     "dependencies": {
-        "@esportsplus/crypto": "^0.0.15"
+        "@esportsplus/crypto": "^0.0.18"
     },
     "devDependencies": {
-        "@esportsplus/typescript": "^0.6.6"
+        "@esportsplus/typescript": "^0.8.11"
     },
     "main": "build/index.js",
     "name": "@esportsplus/random",
@@ -12,8 +12,8 @@
     "scripts": {
         "build": "tsc && tsc-alias",
         "-": "-",
-        "prepare": "npm run build",
-        "prepublishOnly": "npm run build"
+        "prepare": "pnpm build",
+        "prepublishOnly": "pnpm build"
     },
     "type": "module",
     "types": "build/index.d.ts",
