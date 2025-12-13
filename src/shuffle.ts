@@ -1,15 +1,19 @@
-import { rng } from '@esportsplus/crypto';
+import { rng } from './rng';
 
 
 // Fisher-Yates shuffle
 // - https://wikipedia.org/wiki/Fisher-Yates_shuffle
-export default (values: any[]) => {
+export default <T>(values: T[], seed?: string): T[] => {
+    if (values.length === 0) {
+        return values;
+    }
+
     let n = values.length,
         random: number,
-        value;
+        value: T;
 
     while (--n > 0) {
-        random = Math.floor(rng() * (n + 1));
+        random = (rng(seed) * (n + 1)) >>> 0;
         value = values[random];
 
         values[random] = values[n];

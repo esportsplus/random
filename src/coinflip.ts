@@ -1,6 +1,6 @@
-import { rng } from '@esportsplus/crypto';
+import { rng } from './rng';
 
 
-export default () => {
-    return rng() < 0.5;
+export default (seed?: string) => {
+    return rng(seed) < 0.5;
 };

@@ -1,33 +1,27 @@
-import { rng } from '@esportsplus/crypto';
+import { rng } from './rng';
 
 
-export default <T>(items: T[], weights?: number[]): T => {
-    if (weights === undefined) {
-        return items[ Math.floor(rng() * items.length) ];
+export default <T>(map: Map<T, number>, seed?: string): T => {
+    if (map.size === 0) {
+        throw new Error('@esportsplus/random: map cannot be empty');
     }
 
-    let n = items.length,
-        random = 0;
+    let current = 0,
+        total = 0;
 
-    if (n !== weights.length) {
-        throw new Error('Random: each item requires a weight');
+    for (let weight of map.values()) {
+        total += weight;
     }
 
-    for (let i = 0; i < n; i++) {
-        random += weights[i];
-    }
+    let random = rng(seed) * total;
 
-    let current = 0;
-
-    random *= rng();
-
-    for (let i = 0; i < n; i++) {
-        current += weights[i];
+    for (let [item, weight] of map) {
+        current += weight;
 
         if (random <= current) {
-            return items[i];
+            return item;
         }
     }
 
-    throw new Error('Random: weighted item pick failed');
+    throw new Error('@esportsplus/random: weighted item pick failed');
 };
