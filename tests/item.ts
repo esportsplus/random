@@ -54,7 +54,15 @@ describe('item', () => {
                 }
             }
 
-            expect(zeroCount).toBeLessThan(20);
+            expect(zeroCount).toBeLessThan(5);
+        });
+    });
+
+    describe('fallback throw with negative weights', () => {
+        it('throws when weighted pick fails due to negative weights', () => {
+            let map = new Map([['a', -10], ['b', 1]]);
+
+            expect(() => item(map, 'any-seed')).toThrow('@esportsplus/random: weighted item pick failed');
         });
     });
 

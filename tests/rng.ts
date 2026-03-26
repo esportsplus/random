@@ -47,6 +47,19 @@ describe('rng', () => {
         });
     });
 
+    describe('empty string seed', () => {
+        it('treats empty string as unseeded (falsy)', () => {
+            let results = new Set<number>();
+
+            for (let i = 0; i < 10; i++) {
+                results.add(rng(''));
+            }
+
+            // If seeded, all 10 would be identical. Unseeded → likely all different.
+            expect(results.size).toBeGreaterThan(1);
+        });
+    });
+
     describe('rng.seed', () => {
         it('returns a 64-character hex string', () => {
             let seed = rng.seed();

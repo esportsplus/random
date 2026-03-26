@@ -53,6 +53,13 @@ describe('range', () => {
         expect(c).toBe(2);
     });
 
+    it('handles fractional min/max in integer mode', () => {
+        // range(1.5, 2.5, true) → ceil(1.5)=2, floor(2.5)+1=3, so only 2 is possible
+        for (let i = 0; i < 50; i++) {
+            expect(range(1.5, 2.5, true)).toBe(2);
+        }
+    });
+
     it('returns 0 or 1 for range(0, 1, true)', () => {
         let seen = new Set<number>();
 

@@ -31,6 +31,22 @@ describe('between', () => {
         expect(a).toEqual([10, 20]);
     });
 
+    it('seeded rng is stateless so same seed same rng value', () => {
+        // rng(seed) returns the same value for the same seed (no state progression)
+        // first = (r * n) >>> 0, second = (r * (n-1)) >>> 0
+        // These may differ due to different multipliers, but are deterministic
+        let items = ['a', 'b', 'c', 'd', 'e'];
+
+        for (let i = 0; i < 20; i++) {
+            let seed = `test-${i}`,
+                a = between(items, seed),
+                b = between(items, seed);
+
+            expect(a).toEqual(b);
+            expect(a[0]).not.toBe(a[1]);
+        }
+    });
+
     it('returns items from the input array', () => {
         let items = [10, 20, 30, 40, 50],
             result = between(items, 'check');

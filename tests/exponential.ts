@@ -15,9 +15,9 @@ describe('exponential', () => {
     });
 
     describe('returns positive number', () => {
-        it('output is always >= 0', () => {
+        it('output is always > 0', () => {
             for (let i = 0; i < 100; i++) {
-                expect(exponential(1)).toBeGreaterThanOrEqual(0);
+                expect(exponential(1)).toBeGreaterThan(0);
             }
         });
     });
