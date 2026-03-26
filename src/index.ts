@@ -1,3 +1,5 @@
+import { rng } from './rng';
+
 import alphanumeric from './alphanumeric';
 import between from './between';
 import coinflip from './coinflip';
@@ -13,4 +15,4 @@ import sample from './sample';
 import shuffle from './shuffle';
 
 
-export { alphanumeric, between, coinflip, exponential, gaussian, groups, hex, item, pick, range, roll, sample, shuffle };
+export { alphanumeric, between, coinflip, exponential, gaussian, groups, hex, item, pick, range, rng, roll, sample, shuffle };
