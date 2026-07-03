@@ -3,3 +3,5 @@
 .idea
 build
 node_modules
+.claude/storage
+.claude/context-cache.json
