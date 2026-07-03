@@ -1,4 +1,4 @@
-import { rng } from './rng';
+import { generator } from './rng';
 
 
 // Fisher-Yates shuffle
@@ -8,12 +8,13 @@ export default <T>(values: T[], seed?: string): T[] => {
         return values;
     }
 
-    let n = values.length,
+    let draw = generator(seed),
+        n = values.length,
         random: number,
         value: T;
 
     while (--n > 0) {
-        random = (rng(seed) * (n + 1)) >>> 0;
+        random = (draw() * (n + 1)) >>> 0;
         value = values[random];
 
         values[random] = values[n];

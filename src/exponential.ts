@@ -1,18 +1,19 @@
-import { rng } from './rng';
+import { generator } from './rng';
 
 
-// Box-Muller transform for normal distribution
-// - https://en.wikipedia.org/wiki/Box-Muller_transform
+// Inverse-transform sampling of the exponential distribution: F^-1(u) = -ln(u) / lambda
+// - https://en.wikipedia.org/wiki/Inverse_transform_sampling
 export default (lambda: number, seed?: string) => {
     if (lambda <= 0) {
         throw new Error('@esportsplus/random: lambda must be positive');
     }
 
-    let u = rng(seed);
+    let draw = generator(seed),
+        u = draw();
 
     // Avoid log(0)
     while (u === 0) {
-        u = rng(seed);
+        u = draw();
     }
 
     return -Math.log(u) / lambda;

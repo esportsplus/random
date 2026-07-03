@@ -1,4 +1,4 @@
-import { rng } from './rng';
+import { generator } from './rng';
 
 
 export default <T>(items: T[], seed?: string): [T, T] => {
@@ -8,8 +8,9 @@ export default <T>(items: T[], seed?: string): [T, T] => {
         throw new Error('@esportsplus/random: need at least 2 items');
     }
 
-    let first = (rng(seed) * n) >>> 0,
-        second = (rng(seed) * (n - 1)) >>> 0;
+    let draw = generator(seed),
+        first = (draw() * n) >>> 0,
+        second = (draw() * (n - 1)) >>> 0;
 
     if (second >= first) {
         second++;

@@ -1,4 +1,4 @@
-import { rng } from './rng';
+import { generator } from './rng';
 
 
 const CHARS = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
@@ -9,11 +9,12 @@ export default (length: number, seed?: string) => {
         throw new Error('@esportsplus/random: length must be positive');
     }
 
-    let n = CHARS.length,
+    let draw = generator(seed),
+        n = CHARS.length,
         result = '';
 
     for (let i = 0; i < length; i++) {
-        result += CHARS[(rng(seed) * n) >>> 0];
+        result += CHARS[(draw() * n) >>> 0];
     }
 
     return result;

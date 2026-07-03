@@ -1,4 +1,4 @@
-import { rng } from './rng';
+import { generator } from './rng';
 
 
 // Box-Muller transform for normal distribution
@@ -8,12 +8,13 @@ export default (mean: number, stddev: number, seed?: string) => {
         throw new Error('@esportsplus/random: stddev cannot be negative');
     }
 
-    let u1 = rng(seed),
-        u2 = rng(seed);
+    let draw = generator(seed),
+        u1 = draw(),
+        u2 = draw();
 
     // Avoid log(0)
     while (u1 === 0) {
-        u1 = rng(seed);
+        u1 = draw();
     }
 
     let z = Math.sqrt(-2 * Math.log(u1)) * Math.cos(2 * Math.PI * u2);

@@ -1,4 +1,4 @@
-import { rng } from './rng';
+import { generator } from './rng';
 
 
 export default <T>(items: T[], count: number, seed?: string): T[] => {
@@ -10,11 +10,12 @@ export default <T>(items: T[], count: number, seed?: string): T[] => {
         throw new Error('@esportsplus/random: count must be positive');
     }
 
-    let n = items.length,
+    let draw = generator(seed),
+        n = items.length,
         result: T[] = [];
 
     for (let i = 0; i < count; i++) {
-        result.push(items[(rng(seed) * n) >>> 0]);
+        result.push(items[(draw() * n) >>> 0]);
     }
 
     return result;

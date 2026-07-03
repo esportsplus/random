@@ -1,8 +1,11 @@
-const MAX = 0xFFFFFFFF;
+const POOL_SIZE = 1024;
 
-const RNG_BUFFER = new Uint32Array(1);
+const POOL = new Uint32Array(POOL_SIZE);
 
 const SEED_BUFFER = new Uint8Array(32);
+
+
+let cursor = POOL_SIZE;
 
 
 function cyrb128(str: string): [number, number, number, number] {
@@ -49,19 +52,31 @@ function sfc32(a: number, b: number, c: number, d: number): () => number {
         t = t + d | 0;
         c = c + t | 0;
 
-        return (t >>> 0) / MAX;
+        return (t >>> 0) / 0x100000000;
     };
 }
 
-
-function rng(seed?: string): number {
-    if (seed) {
-        let [a, b, c, d] = cyrb128(seed);
-
-        return sfc32(a, b, c, d)();
+function poolDraw(): number {
+    if (cursor >= POOL_SIZE) {
+        crypto.getRandomValues(POOL);
+        cursor = 0;
     }
 
-    return crypto.getRandomValues(RNG_BUFFER)[0] / MAX;
+    return POOL[cursor++] / 0x100000000;
+}
+
+function generator(seed?: string): () => number {
+    if (seed !== undefined) {
+        let [a, b, c, d] = cyrb128(seed);
+
+        return sfc32(a, b, c, d);
+    }
+
+    return poolDraw;
+}
+
+function rng(seed?: string): number {
+    return generator(seed)();
 }
 
 rng.seed = () => {
@@ -76,4 +91,4 @@ rng.seed = () => {
 };
 
 
-export { rng };
+export { generator, rng };

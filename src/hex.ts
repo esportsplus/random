@@ -1,4 +1,4 @@
-import { rng } from './rng';
+import { generator } from './rng';
 
 
 const CHARS = '0123456789abcdef';
@@ -9,10 +9,11 @@ export default (length: number, seed?: string) => {
         throw new Error('@esportsplus/random: length must be positive');
     }
 
-    let result = '';
+    let draw = generator(seed),
+        result = '';
 
     for (let i = 0; i < length; i++) {
-        result += CHARS[(rng(seed) * 16) >>> 0];
+        result += CHARS[(draw() * 16) >>> 0];
     }
 
     return result;
