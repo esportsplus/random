@@ -9,10 +9,15 @@ export default <T>(items: T[], total: number, seed?: string): T[][] => {
     let copy = shuffle([...items], seed),
         groups: T[][] = [],
         n = copy.length,
-        size = Math.ceil(n / total);
+        base = Math.floor(n / total),
+        remainder = n % total,
+        start = 0;
 
     for (let i = 0; i < total; i++) {
-        groups.push(copy.slice(i * size, (i + 1) * size));
+        let size = base + (i < remainder ? 1 : 0);
+
+        groups.push(copy.slice(start, start + size));
+        start += size;
     }
 
     return groups;
