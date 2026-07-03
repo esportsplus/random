@@ -38,7 +38,8 @@ describe('shuffle', () => {
             b = shuffle([1, 2, 3, 4, 5], 'seed');
 
         expect(a).toEqual(b);
-        expect(a).toEqual([2, 3, 4, 5, 1]);
+        expect(a.slice().sort((x, y) => x - y)).toEqual([1, 2, 3, 4, 5]);
+        expect(a).toEqual([3, 4, 5, 2, 1]);
     });
 
     it('actually shuffles with many elements', () => {

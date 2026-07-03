@@ -48,15 +48,15 @@ describe('rng', () => {
     });
 
     describe('empty string seed', () => {
-        it('treats empty string as unseeded (falsy)', () => {
+        it('treats empty string as a valid deterministic seed', () => {
             let results = new Set<number>();
 
             for (let i = 0; i < 10; i++) {
                 results.add(rng(''));
             }
 
-            // If seeded, all 10 would be identical. Unseeded → likely all different.
-            expect(results.size).toBeGreaterThan(1);
+            // '' is a valid seed (undefined-checked, not falsy-skipped): every draw is identical.
+            expect(results.size).toBe(1);
         });
     });
 

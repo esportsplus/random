@@ -44,7 +44,7 @@ describe('sample', () => {
             b = sample([1, 2, 3, 4, 5], 3, 'seed');
 
         expect(a).toEqual(b);
-        expect(a).toEqual([2, 3, 4]);
+        expect(a).toEqual([3, 4, 5]);
     });
 
     it('returns all items when count equals length', () => {

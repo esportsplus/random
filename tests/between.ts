@@ -28,13 +28,12 @@ describe('between', () => {
             b = between([10, 20, 30, 40, 50], 'seed');
 
         expect(a).toEqual(b);
-        expect(a).toEqual([10, 20]);
+        expect(a).toEqual([10, 30]);
     });
 
-    it('seeded rng is stateless so same seed same rng value', () => {
-        // rng(seed) returns the same value for the same seed (no state progression)
-        // first = (r * n) >>> 0, second = (r * (n-1)) >>> 0
-        // These may differ due to different multipliers, but are deterministic
+    it('seeded draws form an independent deterministic pair', () => {
+        // between pulls two sequential draws from one seeded generator:
+        // deterministic per seed, and the pair is always two distinct items.
         let items = ['a', 'b', 'c', 'd', 'e'];
 
         for (let i = 0; i < 20; i++) {
