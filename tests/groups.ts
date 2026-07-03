@@ -42,7 +42,31 @@ describe('groups', () => {
             b = groups([1, 2, 3, 4, 5, 6], 3, 'seed');
 
         expect(a).toEqual(b);
-        expect(a).toEqual([[2, 3], [4, 5], [6, 1]]);
+        expect(a).toEqual([[5, 4], [2, 6], [3, 1]]);
+    });
+
+    it('returns empty groups for an empty items array', () => {
+        let result = groups([], 3);
+
+        expect(result).toHaveLength(3);
+
+        for (let i = 0, n = result.length; i < n; i++) {
+            expect(result[i]).toEqual([]);
+        }
+    });
+
+    it('never produces an empty group when items >= total', () => {
+        let result = groups([1, 2, 3, 4, 5, 6, 7, 8, 9], 4, 'seed');
+
+        expect(result).toHaveLength(4);
+
+        let flat = result.flat().sort((a, b) => a - b);
+
+        expect(flat).toEqual([1, 2, 3, 4, 5, 6, 7, 8, 9]);
+
+        for (let i = 0, n = result.length; i < n; i++) {
+            expect(result[i].length).toBeGreaterThan(0);
+        }
     });
 
     it('produces empty groups when more groups than items', () => {
