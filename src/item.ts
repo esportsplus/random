@@ -18,7 +18,7 @@ export default <T>(map: Map<T, number>, seed?: string): T => {
     for (let [item, weight] of map) {
         current += weight;
 
-        if (random <= current) {
+        if (random < current) {
             return item;
         }
     }
